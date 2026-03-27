@@ -62,23 +62,18 @@ export class KeyboardController {
   }
 
   _showToast(msg) {
-    let toast = document.getElementById('toast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.id = 'toast';
-      toast.style.cssText = `
-        position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
-        background: rgba(0,0,0,0.8); color: #fff; padding: 8px 20px;
-        border-radius: 8px; font-size: 14px; font-weight: 600;
-        z-index: 9999; transition: opacity 0.3s; pointer-events: none;
-      `;
-      document.body.appendChild(toast);
+    if (!this._toast) {
+      this._toast = document.createElement('div');
+      this._toast.className = 'toast';
+      this._toast.setAttribute('role', 'status');
+      this._toast.setAttribute('aria-live', 'polite');
+      document.body.appendChild(this._toast);
     }
-    toast.textContent = msg;
-    toast.style.opacity = '1';
-    clearTimeout(toast._hideTimer);
-    toast._hideTimer = setTimeout(() => {
-      toast.style.opacity = '0';
+    this._toast.textContent = msg;
+    this._toast.style.opacity = '1';
+    clearTimeout(this._toastTimer);
+    this._toastTimer = setTimeout(() => {
+      this._toast.style.opacity = '0';
     }, 1200);
   }
 }

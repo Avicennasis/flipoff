@@ -51,12 +51,20 @@ export class Board {
     // Keyboard hint icon (bottom-left)
     const hint = document.createElement('div');
     hint.className = 'keyboard-hint';
+    hint.setAttribute('role', 'button');
+    hint.setAttribute('tabindex', '0');
+    hint.setAttribute('aria-label', 'Show keyboard shortcuts');
     hint.textContent = 'N';
-    hint.title = 'Keyboard shortcuts';
     hint.addEventListener('click', (e) => {
       e.stopPropagation();
       const overlay = this.boardEl.querySelector('.shortcuts-overlay');
       if (overlay) overlay.classList.toggle('visible');
+    });
+    hint.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hint.click();
+      }
     });
     this.boardEl.appendChild(hint);
 

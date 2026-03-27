@@ -52,25 +52,15 @@
   pointer-events: none;
 }
 
-/* Highlight Sweep (metallic reflection during scramble) */
-.tile-front::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.08) 45%,
-    rgba(255, 255, 255, 0.15) 50%,
-    rgba(255, 255, 255, 0.08) 55%,
-    transparent 100%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s;
-}
-
 /* GPU compositing hint during animation only */
 .tile.scrambling .tile-inner {
   will-change: transform;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .tile-inner {
+    transition: none !important;
+    transform: none !important;
+  }
 }

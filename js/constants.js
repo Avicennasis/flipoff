@@ -4,7 +4,7 @@ export const GRID_ROWS = 5;
 export const FLIP_DURATION = 300;
 export const STAGGER_DELAY = 25;
 export const TOTAL_TRANSITION = 4200;
-export const MESSAGE_INTERVAL = 4000;
+export const MESSAGE_INTERVAL = 6000;
 
 export const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-!?\'/: ';
 
