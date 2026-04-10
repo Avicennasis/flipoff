@@ -51,7 +51,7 @@ export class SoundEngine {
     if (this._currentSource) {
       try {
         this._currentSource.stop();
-      } catch (e) {
+      } catch (_e) {
         // ignore if already stopped
       }
     }

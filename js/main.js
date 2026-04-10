@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const soundEngine = new SoundEngine();
   const board = new Board(boardContainer, soundEngine);
   const rotator = new MessageRotator(board);
-  const keyboard = new KeyboardController(rotator, soundEngine);
+  const _keyboard = new KeyboardController(rotator, soundEngine);
 
   // Initialize audio on first user interaction (browser autoplay policy)
   let audioInitialized = false;
