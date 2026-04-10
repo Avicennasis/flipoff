@@ -18,10 +18,13 @@ jobs:
           node-version: 20
 
       - name: Install tools
-        run: npm install -g eslint htmlhint
+        run: npm install -g eslint htmlhint && npm install --save-dev vitest
 
       - name: ESLint
         run: eslint js/
 
       - name: HTML validation
         run: htmlhint --rules tag-pair,doctype-first,id-unique,src-not-empty index.html
+
+      - name: Test
+        run: npx vitest run
