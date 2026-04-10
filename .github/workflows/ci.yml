@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install tools
+        run: npm install -g eslint htmlhint
+
+      - name: ESLint
+        run: eslint js/
+
+      - name: HTML validation
+        run: htmlhint --rules tag-pair,doctype-first,id-unique,src-not-empty index.html
