@@ -12,7 +12,7 @@ FlipOff is a free, open-source web app that emulates a mechanical split-flap dis
 
 The animation system recreates the signature split-flap behavior: each tile independently scrambles through random characters with colorful background flashes before settling on its target character with a subtle 3D tilt. Only tiles whose content actually changes between messages animate, just like the real thing. The whole transition is accompanied by a single recorded audio clip of an actual mechanical split-flap board, played once per message change for authentic synchronized sound.
 
-**Zero dependencies.** No npm, no Webpack, no React. Pure vanilla HTML, CSS, and ES modules. The entire app is ~80KB including the embedded audio clip. It works offline, loads instantly, and runs on anything with a browser.
+**Zero runtime dependencies.** No npm, no Webpack, no React. Pure vanilla HTML, CSS, and ES modules. The entire app is ~80KB including the embedded audio clip. It works offline, loads instantly, and runs on anything with a browser. Dev tooling (ESLint, HTMLHint, Vitest) is used for CI only and is not needed to run the app.
 
 ---
 
@@ -72,6 +72,8 @@ The app is structured as ES modules with no build step. Each module has a single
 ```
 flipoff/
   index.html                — Single-page entry point. Loads CSS and the main module.
+  package.json              — Dev dependencies only (ESLint, HTMLHint, Vitest) for CI.
+  eslint.config.js          — ESLint v10 flat config for ES modules + browser globals.
   css/
     reset.css               — Box-sizing reset, font smoothing, focus-visible styles
     layout.css              — Page chrome: header, hero section, board container
@@ -181,6 +183,22 @@ The audio is a base64-encoded WAV in `js/flapAudio.js`. To replace it:
 2. Replace the string in `flapAudio.js`: `export const FLAP_AUDIO_BASE64 = 'your-base64-string';`
 
 The clip plays once per transition at 80% volume through the Web Audio API.
+
+---
+
+## CI
+
+GitHub Actions runs on every push and PR to `main`:
+
+- **ESLint** -- Lints all JS files with the flat config (`eslint.config.js`)
+- **HTMLHint** -- Validates `index.html` for tag pairing, doctype, unique IDs, and non-empty `src` attributes
+- **Vitest** -- Runs unit tests for grid formatting and message rotation logic
+
+```bash
+npm install       # Install dev dependencies
+npm run lint      # ESLint
+npm test          # Vitest
+```
 
 ---
 
