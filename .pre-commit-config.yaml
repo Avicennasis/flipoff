@@ -1,0 +1,19 @@
+# Matches CI in .github/workflows/ci.yml
+# Install: pre-commit install
+# Requires: npm install (uses the project's own eslint/htmlhint)
+repos:
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: npx eslint
+        language: system
+        files: ^js/.*\.(js|mjs|cjs)$
+        pass_filenames: true
+
+      - id: htmlhint
+        name: htmlhint
+        entry: npx htmlhint --rules tag-pair,doctype-first,id-unique,src-not-empty
+        language: system
+        files: ^index\.html$
+        pass_filenames: true
