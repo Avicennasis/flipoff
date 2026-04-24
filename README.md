@@ -1,5 +1,13 @@
 # FlipOff.
 
+[![CI](https://github.com/Avicennasis/flipoff/actions/workflows/test.yml/badge.svg)](https://github.com/Avicennasis/flipoff/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/Avicennasis/flipoff/branch/main/graph/badge.svg)](https://codecov.io/gh/Avicennasis/flipoff)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Avicennasis/flipoff/badge)](https://scorecard.dev/viewer/?uri=github.com/Avicennasis/flipoff)
+[![Release](https://img.shields.io/github/v/release/Avicennasis/flipoff?display_name=tag)](https://github.com/Avicennasis/flipoff/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 **Turn any TV into a retro split-flap display.** The classic flip-board aesthetic, without the $3,500 hardware. No accounts, no subscriptions, no build step. Open the file and go.
 
 ![FlipOff Screenshot](screenshot.png)
