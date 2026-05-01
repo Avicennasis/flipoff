@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "eslint": "^10.2.1",
+    "eslint": "^10.3.0",
     "htmlhint": "^1.1.4",
     "vitest": "^4.1.5"
   },
