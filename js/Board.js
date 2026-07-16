@@ -159,7 +159,12 @@ export class Board {
   _formatToGrid(lines) {
     const grid = [];
     for (let r = 0; r < this.rows; r++) {
-      const line = (lines[r] || '').toUpperCase();
+      // Clamp each line to the board width so every grid row is exactly
+      // `this.cols` wide. Without this, a line longer than the board produces
+      // an over-wide row: the overflow chars can't render (only `cols` tiles
+      // exist) yet linger in currentGrid, leaving the grid state with
+      // mismatched row widths.
+      const line = (lines[r] || '').toUpperCase().slice(0, this.cols);
       const padTotal = this.cols - line.length;
       const padLeft = Math.max(0, Math.floor(padTotal / 2));
       const padded = ' '.repeat(padLeft) + line + ' '.repeat(Math.max(0, this.cols - padLeft - line.length));
