@@ -10,7 +10,9 @@ const GRID_ROWS = 5;
 function formatToGrid(lines) {
   const grid = [];
   for (let r = 0; r < GRID_ROWS; r++) {
-    const line = (lines[r] || '').toUpperCase();
+    // Mirror Board._formatToGrid: clamp each line to the board width so every
+    // grid row is exactly GRID_COLS wide.
+    const line = (lines[r] || '').toUpperCase().slice(0, GRID_COLS);
     const padTotal = GRID_COLS - line.length;
     const padLeft = Math.max(0, Math.floor(padTotal / 2));
     const padded = ' '.repeat(padLeft) + line + ' '.repeat(Math.max(0, GRID_COLS - padLeft - line.length));
@@ -50,12 +52,13 @@ describe('formatToGrid', () => {
     });
   });
 
-  it('handles lines longer than grid width', () => {
+  it('clamps lines longer than grid width', () => {
     const longLine = 'A'.repeat(30);
     const grid = formatToGrid([longLine]);
-    // Long lines overflow — padLeft is 0, no right padding added
-    expect(grid[0].length).toBe(30);
-    expect(grid[0][0]).toBe('A');
+    // Long lines are truncated to the board width: the row is always exactly
+    // GRID_COLS wide (the board only has GRID_COLS tiles to render into).
+    expect(grid[0].length).toBe(GRID_COLS);
+    expect(grid[0].join('')).toBe('A'.repeat(GRID_COLS));
   });
 
   it('uppercases all text', () => {
