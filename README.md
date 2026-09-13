@@ -20,7 +20,7 @@ FlipOff is a free, open-source web app that emulates a mechanical split-flap dis
 
 The animation system recreates the signature split-flap behavior: each tile independently scrambles through random characters with colorful background flashes before settling on its target character with a subtle 3D tilt. Only tiles whose content actually changes between messages animate, just like the real thing. The whole transition is accompanied by a single recorded audio clip of an actual mechanical split-flap board, played once per message change for authentic synchronized sound.
 
-**Zero runtime dependencies.** No npm, no Webpack, no React. Pure vanilla HTML, CSS, and ES modules. The entire app is ~80KB including the embedded audio clip. It works offline, loads instantly, and runs on anything with a browser. Dev tooling (ESLint, HTMLHint, Vitest) is used for CI only and is not needed to run the app.
+**Zero runtime dependencies.** No npm, no Webpack, no React. Pure vanilla HTML, CSS, and ES modules. The entire app is ~70KB including the embedded audio clip. It works offline, loads instantly, and runs on anything with a browser. Dev tooling (ESLint, HTMLHint, Vitest) is used for CI only and is not needed to run the app.
 
 ---
 
@@ -31,7 +31,7 @@ The animation system recreates the signature split-flap behavior: each tile inde
 - **Auto-rotating quotes** -- Six built-in inspirational quotes rotate automatically with configurable timing
 - **Fullscreen TV mode** -- Press `F` or click "Launch Display" to go fullscreen, hiding the UI chrome and centering the board on a dark background
 - **Keyboard navigation** -- Full keyboard control for message cycling, fullscreen toggle, and mute
-- **Responsive across all viewports** -- Fluid `clamp()`-based tile sizing from mobile phones (18px tiles) to 4K displays (65px tiles), with breakpoints at 600px, 900px, 1200px, and 2000px
+- **Responsive across all viewports** -- Fluid `clamp()`-based tile sizing from mobile phones (18px tiles) to 4K displays (70px tiles), with breakpoints at 600px, 900px, 1200px, and 2000px
 - **Offline-capable** -- No external requests, no CDN fonts, no analytics. Works without an internet connection
 - **Content-Security-Policy hardened** -- Restricts script and style sources via meta tag
 - **Keyboard accessible** -- `:focus-visible` indicators on all interactive elements
@@ -163,10 +163,10 @@ Changing these will resize the grid. The CSS tile sizing is fluid (`clamp()`-bas
 export const FLIP_DURATION = 300;      // Settle tilt duration (ms)
 export const STAGGER_DELAY = 25;       // Delay between each tile's start (ms)
 export const TOTAL_TRANSITION = 4200;  // Guard window -- prevents overlapping transitions
-export const MESSAGE_INTERVAL = 4000;  // Pause between auto-rotation messages (ms)
+export const MESSAGE_INTERVAL = 6000;  // Pause between auto-rotation messages (ms)
 ```
 
-The auto-rotation period is `MESSAGE_INTERVAL + TOTAL_TRANSITION` (currently 8.2 seconds between message starts).
+The auto-rotation period is `MESSAGE_INTERVAL + TOTAL_TRANSITION` (currently 10.2 seconds between message starts).
 
 ### Colors
 
