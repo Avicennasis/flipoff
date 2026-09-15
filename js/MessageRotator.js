@@ -13,6 +13,10 @@ export class MessageRotator {
     this.next();
 
     // Begin auto-rotation
+    this._startTimer();
+  }
+
+  _startTimer() {
     this._timer = setInterval(() => {
       if (!this.board.isTransitioning) {
         this.next();
@@ -43,11 +47,7 @@ export class MessageRotator {
     // Reset timer when user manually navigates
     if (this._timer) {
       clearInterval(this._timer);
-      this._timer = setInterval(() => {
-        if (!this.board.isTransitioning) {
-          this.next();
-        }
-      }, MESSAGE_INTERVAL + TOTAL_TRANSITION);
+      this._startTimer();
     }
   }
 }
