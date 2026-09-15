@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const soundEngine = new SoundEngine();
   const board = new Board(boardContainer, soundEngine);
   const rotator = new MessageRotator(board);
-  const _keyboard = new KeyboardController(rotator, soundEngine);
+  // The controller registers its own document-level keydown listener in its
+  // constructor, which keeps it alive; the previous `_keyboard` binding was
+  // never read and its name wrongly implied a disposable value.
+  new KeyboardController(rotator, soundEngine);
 
   // Initialize audio on first user interaction (browser autoplay policy)
   let audioInitialized = false;
