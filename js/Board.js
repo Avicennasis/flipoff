@@ -9,7 +9,8 @@ export class Board {
     this.cols = GRID_COLS;
     this.rows = GRID_ROWS;
     this.soundEngine = soundEngine;
-    this.isTransitioning = false;
+    // Timestamp (ms) until which a transition is considered in progress.
+    this._transitionEndsAt = 0;
     this.tiles = [];
     this.currentGrid = [];
     this.accentIndex = 0;
@@ -117,7 +118,7 @@ export class Board {
 
   displayMessage(lines) {
     if (this.isTransitioning) return;
-    this.isTransitioning = true;
+    this._transitionEndsAt = Date.now() + TOTAL_TRANSITION;
 
     // Format lines into grid
     const newGrid = this._formatToGrid(lines);
@@ -150,10 +151,12 @@ export class Board {
     // Update grid state
     this.currentGrid = newGrid;
 
-    // Clear transitioning flag after animation completes
-    setTimeout(() => {
-      this.isTransitioning = false;
-    }, TOTAL_TRANSITION);
+  }
+
+  // Time-based rather than a setTimeout flag: background tabs throttle
+  // timers, so a pending timeout could leave this stuck true on return.
+  get isTransitioning() {
+    return Date.now() < this._transitionEndsAt;
   }
 
   _formatToGrid(lines) {
