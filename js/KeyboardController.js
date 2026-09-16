@@ -13,10 +13,6 @@ export class KeyboardController {
     switch (e.key) {
       case 'Enter':
       case ' ':
-        e.preventDefault();
-        this.rotator.next();
-        break;
-
       case 'ArrowRight':
         e.preventDefault();
         this.rotator.next();
